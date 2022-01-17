@@ -27,8 +27,9 @@ let score = 0
 let lives = 3;
 
 //load Sounds
-const hitWallSnd = new Audio('./js/mixkit-explainer-video-game-alert-sweep-236.wav');
 const gameOverSnd = new Audio('./js/sfx-defeat1.mp3');
+const hitWallSnd = new Audio('./js/mixkit-explainer-video-game-alert-sweep-236.wav');
+
 
 
 
@@ -105,7 +106,6 @@ function speedUp(){
     if(score % 5 === 0){
         newSpeed = speed - 0.5
         speed = Math.round(newSpeed * 10) / 10
-        console.log(speed)
         clearInterval(interval)
         interval = setInterval(move, speed)
     }
@@ -125,15 +125,13 @@ function move() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ball();
     paddle();
-    
+    displayLives();
 
-    //move ball
+    //change direction and bounce off the edges of the canvas (left and right)
     if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
         dx = -dx;
         score = score + 1
-        console.log(score)
         displayScore();
-        displayLives();
         backGroundColor();
         speedUp();
         changeBall();
@@ -141,41 +139,40 @@ function move() {
         hitWallSnd.play();
         }
     
+    //change direction and bounce off the edges of the canvas (top)
     if(y + dy < ballRadius) {
         dy = -dy;
         score = score + 1
         displayScore();
-        displayLives();
         backGroundColor();
         speedUp();
         changeBall();
         // play sound when hitting top border
         hitWallSnd.play();
-        
-        
+    
     } else if(y + dy > canvas.height-(ballRadius)) {
         if(x > paddleStart && x < paddleStart + paddleWidth) {
             dy = -dy;
         }
         else {
             lives--;
+            displayLives();
             if(!lives) {
+                console.log(lives)
                 gameOverSnd.play();
-                alert("GAME OVER");
                 document.location.reload();
+                alert("GAME OVER");
                 clearInterval(interval);
                 
             }
             else {
                 x = canvas.width/2;
                 y = canvas.height-30;
-                dx = 2;
-                dy = -2;
-                paddleX = (canvas.width-paddleWidth)/2;
+                dx = 1;
+                dy = -1;
+                paddleStart = (canvas.width-paddleWidth)/2;
+                
             }
-            //alert("GAME OVER");
-            //document.location.reload();
-            //clearInterval(interval);
     }
     }
    
@@ -192,7 +189,8 @@ function move() {
             paddleStart = 0;
         }
     }
-
+    
+    //moves the ball
     x += dx;
     y += dy;
     
