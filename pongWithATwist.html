@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PongWithATwist</title>
+    <!--Styles-->
+    <link rel="stylesheet" href="./styles/style.css"/>
+  </head>
+  <!--Body-->
+  <body>
+    <div class='headline'> 
+        <p> <strong> PONG With A Twist </strong> </p>
+    </div>
+    
+    <canvas id="gameArea" width="580" height="420"></canvas>
+    
+    <div class="score">
+      <p>SCORE</p>
+      <input type="number" value="0" min="0" placeholder="Score" />
+    </div>
+    
+    <div class="lives">
+        <p>Lives</p>
+        <input type="number" value="0" min="0" placeholder="Lives" />
+    </div>
+
+    <button id="start">START GAME</button>
+    
+    <script src="./js/pongWithATwist.js"></script>
+  </body>
+</html>
