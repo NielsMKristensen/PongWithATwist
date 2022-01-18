@@ -99,6 +99,7 @@ function backGroundColor(){
         let randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
         let backGround = document.querySelector('canvas')
         backGround.style.backgroundColor = randomColor;
+        
     }
 }
 
@@ -161,7 +162,6 @@ function move() {
             lives--;
             if(!lives) {
                 displayLives();
-                //console.log(lives)
                 const gameOverSnd = new Audio('./js/sfx-defeat1.mp3');
                 gameOverSnd.play();
                 //load canvas image
@@ -179,6 +179,8 @@ function move() {
                 
             }
             else {
+                const ballOut = new Audio('./js/ballOut.mp3');
+                ballOut.play();
                 x = canvas.width/2;
                 y = canvas.height-30;
                 dx = 1;
