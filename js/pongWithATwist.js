@@ -18,7 +18,7 @@ let ballRadius = 20; //when using emoji ths is kind of guessing game. would be e
 let paddleHeight = 10;
 let paddleWidth = 75;
 let paddleStart = (canvas.width-paddleWidth) / 2;
-let paddleColor = 'red'
+let paddleColor = 'black'
 let right = false;
 let left = false;
 //Score
@@ -27,8 +27,9 @@ let score = 0
 let lives = 3;
 
 //load Sounds
-const gameOverSnd = new Audio('./js/sfx-defeat1.mp3');
 const hitWallSnd = new Audio('./js/mixkit-explainer-video-game-alert-sweep-236.wav');
+
+
 
 
 
@@ -149,20 +150,32 @@ function move() {
         changeBall();
         // play sound when hitting top border
         hitWallSnd.play();
-    
+    // check if ball runs out and manage lives.
     } else if(y + dy > canvas.height-(ballRadius)) {
         if(x > paddleStart && x < paddleStart + paddleWidth) {
             dy = -dy;
+            // play sound when hitting paddle
+            hitWallSnd.play();
         }
         else {
             lives--;
-            displayLives();
             if(!lives) {
-                console.log(lives)
+                displayLives();
+                //console.log(lives)
+                const gameOverSnd = new Audio('./js/sfx-defeat1.mp3');
                 gameOverSnd.play();
-                document.location.reload();
-                alert("GAME OVER");
+                //load canvas image
+                let gameOverImg = new Image();   // Create new img element
+                gameOverImg.src = './js/gameOver.jpg'; // Set source path
+                gameOverImg.onload = function(){
+                    ctx.drawImage(gameOverImg, 0, 0, canvas.width, canvas.height);
+                };
+                let buttonContent = document.querySelector('button')
+                buttonContent.innerHTML = 'Continue';
+                //alert("GAME OVER");
+                //document.location.reload();
                 clearInterval(interval);
+                
                 
             }
             else {
@@ -170,8 +183,7 @@ function move() {
                 y = canvas.height-30;
                 dx = 1;
                 dy = -1;
-                paddleStart = (canvas.width-paddleWidth)/2;
-                
+                paddleStart = (canvas.width-paddleWidth)/2;  
             }
     }
     }
@@ -200,7 +212,14 @@ function move() {
 let start = document.getElementById('start');
 let interval = '';
 start.onclick = function() {
-    interval = setInterval(move, speed);
+    if (lives === 0){
+        document.location.reload();
+        
+    } else {
+        interval = setInterval(move, speed);
+    }
+    
+    
 }
 
 
