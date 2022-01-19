@@ -14,19 +14,19 @@ let speed = 10;
 let ballEmo = '🥵'
 let emojiArray = ['😃','😂','😍','😆','🥰','🤢', '🥵'];
 let ballRadius = 20; //when using emoji ths is kind of guessing game. would be easier with Arc, might rewrite code to use arc and pictures.
-//Paddle size and start position and color and move
-let paddleHeight = 10;
+//Paddle size and start position, color and move
+let paddleHeight = 15;
 let paddleWidth = 75;
 let paddleStart = (canvas.width-paddleWidth) / 2;
-let paddleColor = 'silver'
+let paddleColor = 'black'
 let right = false;
 let left = false;
 //Score
-let score = 0
+let score = 0;
 //lives
 let lives = 3;
 
-//load Sounds
+//load hit wall sound
 const hitWallSnd = new Audio('./js/mixkit-explainer-video-game-alert-sweep-236.wav');
 
 
@@ -64,7 +64,7 @@ function ball() {
     ctx.textBaseline = 'middle'
     ctx.fillText(ballEmo, x, y)
     //Emoji fun :-)
-    
+    ctx.closePath();
 }
 
 // drawing the paddle
@@ -74,6 +74,33 @@ function paddle() {
     ctx.fillStyle = paddleColor;
     ctx.fill();
     ctx.closePath();
+}
+
+//adds fire to the bottom border.
+function fire() {
+    let xStart = -10
+    let xDraw1 = 0
+    let xDraw2 = 10
+    
+    for (let i = 0; i < canvas.width; i = i + 10){
+        ctx.beginPath();
+        ctx.moveTo(xStart,420);
+        ctx.lineTo(xDraw1,410);
+        ctx.lineTo(xDraw2,420);
+        ctx.fillStyle = 'orange';
+        ctx.fill();
+        ctx.closePath();
+        xStart = xStart + 10;
+        xDraw1 = xDraw1 + 10;
+        xDraw2 = xDraw2 + 10;
+        ctx.beginPath();
+        ctx.moveTo(xStart,420);
+        ctx.lineTo(xDraw1,410);
+        ctx.lineTo(xDraw2,420);
+        ctx.fillStyle = 'orange';
+        ctx.fill();
+        ctx.closePath();
+    }   
 }
 
 //Display the score on screen
@@ -124,6 +151,7 @@ function move() {
     ball();
     paddle();
     displayLives();
+    fire();
 
     //change direction and bounce off the edges of the canvas (left and right)
     if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
@@ -207,15 +235,18 @@ ctx.clearRect(0, 0, canvas.width, canvas.height);
 ball();
 paddle();
 displayLives();
+fire();
 
 //Start game button
 let start = document.getElementById('start');
 let interval = '';
 start.onclick = function() {
-    if (lives === 0){
+    if (lives === 0 || lives < 0){
+        clearInterval(interval);
         document.location.reload();
         
     } else {
+        clearInterval(interval);
         interval = setInterval(move, speed);
     }
     
