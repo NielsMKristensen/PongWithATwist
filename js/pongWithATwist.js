@@ -18,7 +18,7 @@ let ballRadius = 20; //when using emoji ths is kind of guessing game. would be e
 let paddleHeight = 10;
 let paddleWidth = 75;
 let paddleStart = (canvas.width-paddleWidth) / 2;
-let paddleColor = 'black'
+let paddleColor = 'silver'
 let right = false;
 let left = false;
 //Score
@@ -28,12 +28,6 @@ let lives = 3;
 
 //load Sounds
 const hitWallSnd = new Audio('./js/mixkit-explainer-video-game-alert-sweep-236.wav');
-
-
-
-
-
-
 
 
 //what button have been pressed
@@ -110,6 +104,8 @@ function speedUp(){
         speed = Math.round(newSpeed * 10) / 10
         clearInterval(interval)
         interval = setInterval(move, speed)
+        const speedUpSnd = new Audio('./js/SpeedUp.mp3');
+                speedUpSnd.play();
     }
 }
 
@@ -172,11 +168,7 @@ function move() {
                 };
                 let buttonContent = document.querySelector('button')
                 buttonContent.innerHTML = 'Continue';
-                //alert("GAME OVER");
-                //document.location.reload();
                 clearInterval(interval);
-                
-                
             }
             else {
                 const ballOut = new Audio('./js/ballOut.mp3');
@@ -210,6 +202,12 @@ function move() {
     
 }
 
+//initialize canvas and lives fields
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+ball();
+paddle();
+displayLives();
+
 //Start game button
 let start = document.getElementById('start');
 let interval = '';
@@ -224,10 +222,20 @@ start.onclick = function() {
     
 }
 
+//playing with the styles and colors
+
+//change color of headline on a time basis.
 
 
 
+function changeColor(){
+    let headerText = document.getElementById('header')
+    let newColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+    headerText.style.color = newColor
+}
 
+
+setInterval(changeColor,100)
     
 
 
