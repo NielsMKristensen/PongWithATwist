@@ -13,8 +13,7 @@ let speed = 10;
 //ball emoji select and size
 let ballEmo = '🥵'
 let emojiArray = ['😃','😂','😍','😆','🥰','🤢', '🥵'];
-let ballRadius = 20; //when using emoji ths is kind of guessing game. would be easier with Arc, might rewrite code to use arc and pictures.
-//Paddle size and start position, color and move
+let ballRadius = 20; 
 let paddleHeight = 15;
 let paddleWidth = 75;
 let paddleStart = (canvas.width-paddleWidth) / 2;
@@ -144,6 +143,7 @@ function changeBall(){
     }
 
 }
+
 
 //main function moves/adds the ball and paddle to the canvas and manages borders.
 function move() {
