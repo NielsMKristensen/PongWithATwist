@@ -256,18 +256,68 @@ start.onclick = function() {
 //playing with the styles and colors
 
 //change color of headline on a time basis.
-
-
-
 function changeColor(){
     let headerText = document.getElementById('header')
     let newColor = "#" + Math.floor(Math.random()*16777215).toString(16);
     headerText.style.color = newColor
 }
 
-
 setInterval(changeColor,100)
+
+//more buttons show help about and high score
+
+let help = document.getElementById('help');
+help.onclick = function() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ball();
+    paddle();
+    displayLives();
+    fire();
+    ctx.font = "30px Comic Sans MS";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.fillText("How to play:", canvas.width/2, 50);
+    ctx.font = "20px Comic Sans MS";
+    ctx.textAlign = "left";
+    ctx.fillText("LEFT and Right arrow key controls the paddle.", 10, 90);
+    ctx.fillText("Prevent the cute Emoji from falling into the FIRE.", 10, 120);
+    ctx.fillText("Warning: ball will speed up making it harder to avoid FIRE", 10, 150);
+    ctx.fillText("Have FUN!", 10, 180);
+   }
+
+let about = document.getElementById('about');
+about.onclick = function() { 
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ball();
+    paddle();
+    displayLives();
+    fire();
+    ctx.font = "30px Comic Sans MS";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.fillText("About:", canvas.width/2, 50);
+    ctx.font = "20px Comic Sans MS";
+    ctx.fillText("Created by : Mylle", canvas.width/2, 90);
+    ctx.fillText("History: First game ever created", canvas.width/2, 120);
+    ctx.fillText("Copyright: The Internet", canvas.width/2, 150);
+    ctx.fillText("Inspired by the Game PONG", canvas.width/2, 180);
+    //image
+    var pongImg = new Image();  
     
+    pongImg.onload = function(){
+        
+        ctx.drawImage(pongImg,canvas.width/2 - 100,210);
+    } 
+    pongImg.src = "./js/PONG.jpg";
+    
+}
+
+/*
+let highScore = document.getElementById('highscore');
+highScore.onclick = function() {
+    
+    }
+*/
 
 
 
