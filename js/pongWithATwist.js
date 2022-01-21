@@ -14,6 +14,7 @@ let speed = 10;
 let ballEmo = '🥵'
 let emojiArray = ['😃','😂','😍','😆','🥰','🤢', '🥵'];
 let ballRadius = 20; 
+//paddle size and color
 let paddleHeight = 15;
 let paddleWidth = 75;
 let paddleStart = (canvas.width-paddleWidth) / 2;
@@ -50,19 +51,10 @@ document.addEventListener('keydown', (e) => {
 // drawing the Ball
 function ball() {
     ctx.beginPath();
-    // white ball using arc
-    //ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-    //ctx.fillStyle = "white";
-    //ctx.fill();
-    //ctx.closePath();
-    //white ball using arc
-
-    //Emoji fun :-)
     ctx.font = '2em serif'
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle'
     ctx.fillText(ballEmo, x, y)
-    //Emoji fun :-)
     ctx.closePath();
 }
 
@@ -108,6 +100,7 @@ function displayScore(){
     htmlScore.setAttribute('value', score)
 }
 
+//Display lives on screen
 function displayLives(){
     let htmlLives = document.querySelector('.lives input')
     htmlLives.setAttribute('value', lives)
@@ -253,8 +246,6 @@ start.onclick = function() {
     
 }
 
-//playing with the styles and colors
-
 //change color of headline on a time basis.
 function changeColor(){
     let headerText = document.getElementById('header')
@@ -264,8 +255,7 @@ function changeColor(){
 
 setInterval(changeColor,100)
 
-//more buttons show help about and high score
-
+//buttons help and about
 let help = document.getElementById('help');
 help.onclick = function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -312,12 +302,7 @@ about.onclick = function() {
     
 }
 
-/*
-let highScore = document.getElementById('highscore');
-highScore.onclick = function() {
-    
-    }
-*/
+
 
 
 
