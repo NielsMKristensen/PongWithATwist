@@ -19,14 +19,19 @@ Warning: ball will speed up making it harder to avoid FIRE
 ## Documentation
 The code comments should contain the most important information.
 
+## Tech stack
+- JS
+- HTML5
+- CSS3
+
 ## Future improvements:
 
-# Iteration 2
+### Iteration 2
 - High score list and player name.
 - difficulty increase making pedal smaller.
 - difficulty increase making holes in the borders.
 
-# Iteration 3
+### Iteration 3
 - falling debris
 - power up's
 - power down's
